@@ -1,6 +1,6 @@
-# Gutenberg Books Collection
+# Books Catalogue
 
-**Gutenberg Books Collection** is a WordPress plugin that integrates with the Gutendex API to display a collection of books. The plugin provides features like pagination, filtering by authors, topics, and language, and a user-friendly interface for browsing the book collection.
+**Books Catalogue** is a WordPress plugin that integrates with the Gutendex API to display a collection of books. The plugin provides features like pagination, filtering by authors, topics, and language, and a user-friendly interface for browsing the book collection.
 
 ---
 
@@ -19,17 +19,17 @@
 
 1. Download the plugin files or clone the repository.
 2. Navigate to the WordPress directory: `wp-content/plugins/`.
-3. Create a folder named `gutenberg-books` and upload the plugin files into this folder.
+3. Create a folder named `books-catalogue` and upload the plugin files.
 4. Log in to your WordPress admin dashboard.
-5. Navigate to **Plugins > Installed Plugins**.
-6. Find **Gutenberg Books Collection** and click **Activate**.
+5. Navigate to **Plugins > Installed Plugins** and activate the plugin.
 
 ---
 
 ## Usage
 
+
 1. Create a new page or edit an existing one.
-2. Add the shortcode `[gutenberg_books]` to the page content.
+2. Add the shortcode `[books_catalogue]` to the page content.
 3. Save and view the page to see the book collection.
 
 ---
@@ -49,8 +49,8 @@ Navigate through the collection using "Previous" and "Next" buttons, with the cu
 
 ## Customization
 
-- **CSS Styling**: Modify the `style.css` file in the plugin directory to customize the appearance.
-- **JavaScript Enhancements**: Update the `script.js` file to extend or modify client-side functionality.
+- **CSS Styling**: Modify the `assets/css/bca-style.css` file in the plugin directory to customize the appearance.
+- **JavaScript Enhancements**: Update the `assets/js/bca-script.js` file to extend or modify client-side functionality.
 
 ---
 
@@ -72,9 +72,3 @@ Navigate through the collection using "Previous" and "Next" buttons, with the cu
 ## Contributing
 
 Feel free to contribute to this project by submitting a pull request or reporting issues. 
-
----
-
-## Support
-
-If you encounter any issues or have feature requests, please open an issue on the repository.

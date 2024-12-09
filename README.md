@@ -39,11 +39,17 @@
 ### Books Display
 Books are displayed in a grid layout with their titles, authors, and cover images.
 
+![Books Display](assets/img/BooksDisplay.png)
+
 ### Filter Form
 A simple form at the top of the collection allows users to filter books by author, topic, and language.
 
+![FilterForm](assets/img/FilterForm.png)
+
 ### Pagination
 Navigate through the collection using "Previous" and "Next" buttons, with the current page displayed.
+
+![Pagination](assets/img/Pagination.png)
 
 ---
 

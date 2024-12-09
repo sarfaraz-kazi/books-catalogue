@@ -31,12 +31,12 @@ class Init {
         wp_enqueue_script('jquery');
         wp_enqueue_script(
             'books-catalogue-script',
-            plugin_dir_url(__DIR__) . 'assets/bca-script.js',
+            plugin_dir_url(__DIR__) . 'assets/js/bca-script.js',
             ['jquery'],
             null,
             true
         );
-        wp_localize_script('books-catalogue-script', 'BooksCatalogue', [
+        wp_localize_script('books-catalogue-script', 'booksCatalogue', [
             'ajax_url' => admin_url('admin-ajax.php'),
         ]);
     }
@@ -51,17 +51,14 @@ class Init {
         ?>
         <div id="books-catalogue">
             <form id="books-filter-form">
-                <input type="text" id="filter-author" placeholder="<?php esc_html_e( 'Filter by Author', 'books-catalogue' ); ?>" name="author">
-                <input type="text" id="filter-topic" placeholder="<?php esc_html_e( 'Filter by Topic', 'books-catalogue' ); ?>" name="topic">
-                <input type="text" id="filter-language" placeholder="<?php esc_html_e( 'Filter by Language', 'books-catalogue' ); ?>" name="language">
-                <button type="submit"><?php esc_html_e( 'Filter', 'books-catalogue' ); ?></button>
+                <input type="text" id="search-input" placeholder="<?php esc_html_e('Search', 'books-catalogue'); ?>" name="search">
+                <input type="text" id="language-filter" placeholder="<?php esc_html_e('Filter by Language', 'books-catalogue'); ?>" name="language">
+                <input type="text" id="author-filter" placeholder="<?php esc_html_e('Filter by Author', 'books-catalogue'); ?>" name="author">
+                <input type="text" id="subject-filter" placeholder="<?php esc_html_e('Filter by Subject', 'books-catalogue'); ?>" name="subject">
+                <button type="submit"><?php esc_html_e('Filter', 'books-catalogue'); ?></button>
             </form>
             <div id="books-list"></div>
-            <div id="pagination">
-                <button id="prev-page"><?php esc_html_e( 'Previous', 'books-catalogue' ); ?></button>
-                <span id="current-page">1</span>
-                <button id="next-page"><?php esc_html_e( 'Next', 'books-catalogue' ); ?></button>
-            </div>
+            <div id="pagination"></div>
         </div>
         <?php
         return ob_get_clean();
@@ -71,29 +68,47 @@ class Init {
      * Handle AJAX requests for fetching books from the Gutendex API.
      */
     public static function fetch_books() {
-        // Sanitize input parameters.
-        $author = sanitize_text_field($_POST['author'] ?? '');
-        $topic = sanitize_text_field($_POST['topic'] ?? '');
-        $language = sanitize_text_field($_POST['language'] ?? '');
-        $page = absint($_POST['page'] ?? 1);
+        $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $books_per_page = isset($_POST['books_per_page']) ? intval($_POST['books_per_page']) : 12;
+        $search = isset($_POST['search']) ? sanitize_text_field($_POST['search']) : '';
+        $language = isset($_POST['language']) ? sanitize_text_field($_POST['language']) : '';
+        $author = isset($_POST['author']) ? sanitize_text_field($_POST['author']) : '';
+        $subject = isset($_POST['subject']) ? sanitize_text_field($_POST['subject']) : '';
 
-        $api_url = 'https://gutendex.com/books/?page=' . $page;
-        if (!empty($author)) {
-            $api_url .= '&author=' . urlencode($author);
-        }
-        if (!empty($topic)) {
-            $api_url .= '&topic=' . urlencode($topic);
+        $api_url = "https://gutendex.com/books/?page=$page&page_size=$books_per_page";
+
+        if (!empty($search)) {
+            $api_url .= "&search=" . urlencode($search);
         }
         if (!empty($language)) {
-            $api_url .= '&language=' . urlencode($language);
+            $api_url .= "&languages=" . urlencode($language);
+        }
+        if (!empty($author)) {
+            $api_url .= "&author=" . urlencode($author);
+        }
+        if (!empty($subject)) {
+            $api_url .= "&subject=" . urlencode($subject);
         }
 
         $response = wp_remote_get($api_url);
         if (is_wp_error($response)) {
-            wp_send_json_error('Failed to fetch books.');
+            wp_send_json_error(['message' => 'Failed to fetch data from the API.']);
         }
 
-        $books = wp_remote_retrieve_body($response);
-        wp_send_json_success($books);
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            wp_send_json_error(['message' => 'Invalid JSON returned from the API.']);
+        }
+
+        $total_books = $data['count'] ?? 0;
+        $books = $data['results'] ?? [];
+        $total_pages = ceil($total_books / $books_per_page);
+
+        wp_send_json_success([
+            'books' => $books,
+            'total_pages' => $total_pages,
+        ]);
     }
 }

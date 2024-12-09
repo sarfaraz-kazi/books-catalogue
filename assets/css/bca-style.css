@@ -1,0 +1,176 @@
+/* General container styling */
+#books-catalogue {
+    font-family: 'Roboto', Arial, sans-serif;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Filter form */
+#books-catalogue #books-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+#books-catalogue #books-filter-form input,
+#books-catalogue #books-filter-form select {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#books-catalogue #books-filter-form input:focus,
+#books-catalogue #books-filter-form select:focus {
+    border-color: #0073aa;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 115, 170, 0.3);
+}
+
+#books-catalogue #books-filter-form button {
+    padding: 12px 20px;
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#books-catalogue #books-filter-form button:hover {
+    background-color: #005f8d;
+    transform: translateY(-2px);
+}
+/* Wrapper for the books list */
+#books-catalogue #books-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid with min column width */
+    gap: 20px; /* Spacing between cards */
+    margin: 20px auto; /* Center the grid within the wrapper */
+    max-width: 1200px; /* Restrict maximum width for better aesthetics */
+    padding: 0 20px; /* Add padding to the edges */
+}
+
+/* Individual book card */
+#books-catalogue .book-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Download button styling */
+.download-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #ff6b6b, #f94d6a);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect for the download button */
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(45deg, #ff9478, #f76b82);
+}
+
+/* Hover effect for book cards */
+#books-catalogue .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Book cover image styling */
+#books-catalogue .book-image {
+    width: 100%; /* Full width of the card */
+    height: auto;
+    max-height: 250px; /* Prevent excessively tall images */
+    object-fit: cover; /* Ensure images fit within their container */
+    border-radius: 4px; /* Rounded corners for images */
+    margin-bottom: 10px; /* Spacing below the image */
+}
+
+/* Book title */
+#books-catalogue .book-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+    text-overflow: ellipsis; /* Handle long titles */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Author, subjects, and language details */
+#books-catalogue .book-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+/* Pagination styling */
+#books-catalogue #pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#books-catalogue .pagination-btn {
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#books-catalogue .pagination-btn:hover {
+    background: #005b85;
+    transform: translateY(-2px);
+}
+
+#books-catalogue .pagination-btn.active {
+    background: #005b85;
+    font-weight: bold;
+}
+/* Responsive design */
+@media (max-width: 768px) {
+    #books-catalogue #books-filter-form {
+        flex-direction: column;
+    }
+
+    #books-catalogue #books-filter-form input,
+    #books-catalogue #books-filter-form select,
+    #books-catalogue #books-filter-form button {
+        flex: none;
+        width: 100%;
+    }
+}

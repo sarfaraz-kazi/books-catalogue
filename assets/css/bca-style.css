@@ -52,36 +52,71 @@
     background-color: #005f8d;
     transform: translateY(-2px);
 }
-/* Wrapper for the books list */
-#books-catalogue #books-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid with min column width */
-    gap: 20px; /* Spacing between cards */
-    margin: 20px auto; /* Center the grid within the wrapper */
-    max-width: 1200px; /* Restrict maximum width for better aesthetics */
-    padding: 0 20px; /* Add padding to the edges */
+
+#books-catalogue .book-list-view {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+/* Hover effect for book cards */
+#books-catalogue .book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Individual book card */
-#books-catalogue .book-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+#books-catalogue .book-item {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    gap: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    align-items: center;
+    background-color: #fff;
 }
 
+#books-catalogue .image-wrapper {
+    flex-shrink: 0;
+    width: 100px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+#books-catalogue .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+#books-catalogue .book-details {
+    flex-grow: 1;
+}
+
+#books-catalogue .book-details h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #aa873b;
+    font-weight: 600;
+}
+#books-catalogue .author-name{
+    background-color: #aa873b;
+    padding: 2px 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+#books-catalogue .book-details p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
 /* Download button styling */
-.download-btn {
+#books-catalogue .download-btn {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 15px;
-    background: linear-gradient(45deg, #ff6b6b, #f94d6a);
+    background: linear-gradient(45deg, #ff6b6b, #aa873b);
     color: #fff;
     text-decoration: none;
     font-size: 14px;
@@ -93,48 +128,15 @@
 }
 
 /* Hover effect for the download button */
-.download-btn:hover {
+#books-catalogue .download-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     background: linear-gradient(45deg, #ff9478, #f76b82);
 }
 
-/* Hover effect for book cards */
-#books-catalogue .book-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Book cover image styling */
-#books-catalogue .book-image {
-    width: 100%; /* Full width of the card */
-    height: auto;
-    max-height: 250px; /* Prevent excessively tall images */
-    object-fit: cover; /* Ensure images fit within their container */
-    border-radius: 4px; /* Rounded corners for images */
-    margin-bottom: 10px; /* Spacing below the image */
-}
-
-/* Book title */
-#books-catalogue .book-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #333;
-    text-overflow: ellipsis; /* Handle long titles */
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-/* Author, subjects, and language details */
-#books-catalogue .book-card p {
-    font-size: 14px;
-    color: #666;
-    margin: 5px 0;
-    line-height: 1.4;
-}
 
 /* Pagination styling */
-#books-catalogue #pagination {
+#books-catalogue .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,7 +144,6 @@
 }
 
 #books-catalogue .pagination-btn {
-    background: #0073aa;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -150,10 +151,10 @@
     margin: 0 5px;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
 }
 
 #books-catalogue .pagination-btn:hover {
-    background: #005b85;
     transform: translateY(-2px);
 }
 

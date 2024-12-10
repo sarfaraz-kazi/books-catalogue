@@ -43,7 +43,8 @@ spl_autoload_register(function ($class) {
 });
 
 // Include the main plugin initialization file.
-require_once __DIR__ . '/includes/Init.php';
+require_once __DIR__ . '/includes/class-books-catalogue-init.php';
+require_once __DIR__ . '/includes/class-books-catalogue-fetch.php';
 
 // Initialize the plugin.
 Init::register();
